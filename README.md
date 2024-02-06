@@ -15,9 +15,12 @@ sudo apt update -y
 ```
 # Install kubectl
 ```
-curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl$ chmod +x ./kubectl$ sudo mv ./kubectl /usr/local/bin/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 ```
-# Install docker
+```
+sudo mv ./kubectl /usr/local/bin/kubectl
+```
+# Install dockerchmod +x ./kubectl
 ```
 sudo apt-get update && \
     sudo apt-get install docker.io -y
@@ -34,8 +37,26 @@ minikube version
 ```
 sudo apt install conntrack
 ```
+# installing docker shim
+```
+git clone https://github.com/Mirantis/cri-dockerd.git
+```
 # install the crictl
 ```
-wget https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.26.0/crictl-v1.26.0-linux-amd64.tar.gz
+VERSION="v1.24.1"
+curl -L https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-${VERSION}-linux-amd64.tar.gz --output crictl-${VERSION}-linux-amd64.tar.gz
+sudo tar zxvf crictl-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
+rm -f crictl-$VERSION-linux-amd64.tar.gz
+```
+# using WGET
+```
+VERSION="v1.24.1"
+wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-$VERSION-linux-amd64.tar.gz
+sudo tar zxvf crictl-$VERSION-linux-amd64.tar.gz -C /usr/local/bin
+rm -f crictl-$VERSION-linux-amd64.tar.gz
+```
+# Starting minikube
+```
+minikube start --vm-driver=none
 ```
 
