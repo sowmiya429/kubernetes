@@ -60,3 +60,7 @@ rm -f crictl-$VERSION-linux-amd64.tar.gz
 minikube start --vm-driver=none
 ```
 
+# start minikube forcefully on docker
+```
+minikube start --force --driver=docker
+```
